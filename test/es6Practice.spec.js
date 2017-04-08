@@ -456,19 +456,19 @@ describe('generator - `yield` is used to pause and resume a generator function',
   });
 
   it('converting a generator to an array resumes the generator until all values are received', () => {
-    let values = Array.from();
+    let values = Array.from([generator.next().value, generator.next().value]);
     assert.deepEqual(values, ['hello', 'world']);
   });
 
   describe('after the first `generator.next()` call', function() {
 
     it('the value is "hello"', function() {
-      const {value} = generator.next;
+      const {value} = generator.next();
       assert.equal(value, 'hello');
     });
 
     it('and `done` is false', function() {
-      const {done} = generator;
+      const {done} = generator.next();
       assert.equal(done, false);
     });
 
@@ -478,6 +478,7 @@ describe('generator - `yield` is used to pause and resume a generator function',
 
     let secondItem;
     beforeEach(function() {
+      generator.next();
       secondItem = generator.next();
     });
 
@@ -487,7 +488,7 @@ describe('generator - `yield` is used to pause and resume a generator function',
     });
 
     it('and `done` is still false', function() {
-      const done = secondItem;
+      const {done} = secondItem;
       assert.equal(done, false);
     });
   });
@@ -497,7 +498,7 @@ describe('generator - `yield` is used to pause and resume a generator function',
     it('`done` property equals true, since there is nothing more to iterator over', function() {
       generator.next();
       generator.next();
-      let done = generator.done;
+      let done = generator.next().done;
       assert.equal(done, true);
     });
 
