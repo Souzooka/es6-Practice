@@ -267,10 +267,10 @@ describe('a template string, is wrapped in ` (backticks) instead of \' or "', fu
     });
 
     it('inside "${...}" can also be a function call', function() {
-      function getDomain(){
+      function getDomain(document){
         return document.domain;
       }
-      var evaluated = `${ getDomain }`;
+      var evaluated = `${ getDomain( { domain: 'tddbin.com'} ) }`;
       assert.equal(evaluated, 'tddbin.com');
     });
 
