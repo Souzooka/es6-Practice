@@ -182,7 +182,6 @@ describe('`Map` is a key/value map', function(){
     const otherObj = {x: 1};
     let map = new Map();
     map.set(obj, '');
-    map.set(otherObj, '');
 
     assert.equal(map.has(otherObj), false);
   });
